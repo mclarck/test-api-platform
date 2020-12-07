@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Entity\User" table="users">
+
+    	<indexes>
+            <index name="username" columns="username"/>
+            <index columns="email"/>
+        </indexes>
+
+        <unique-constraints>
+            <unique-constraint columns="username,email" name="search_idx" />
+        </unique-constraints>
+
+       <!--  <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="doStuffOnPrePersist"/>
+            <lifecycle-callback type="prePersist" method="doOtherStuffOnPrePersistToo"/>
+            <lifecycle-callback type="postPersist" method="doStuffOnPostPersist"/>
+        </lifecycle-callbacks> -->
+
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+            <sequence-generator sequence-name="tablename_seq" allocation-size="100" initial-value="1" />
+        </id>
+
+        <field name="username" column="username" type="string" length="50" unique="true" />
+        <field name="email" column="email" type="string" length="32" />
+        <field name="password" column="password" type="string" />
+        <field name="roles" column="roles" type="array" />
+        <field name="apiKey" column="apiKey" type="text" />
+        <field name="status" column="status" type="string" />
+
+    </entity>
+</doctrine-mapping>
